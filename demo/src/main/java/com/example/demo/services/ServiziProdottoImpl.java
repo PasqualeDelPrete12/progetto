@@ -38,7 +38,8 @@ public class ServiziProdottoImpl implements ServiziProdotto {
                         ProdottoEntity prodottoAggiornato = prodottoRepository.save(prodottoEsistente);
                             return modelMapper.map(prodottoAggiornato, ProdottoResponse.class);
         } else {
-            throw new RuntimeException("Il prodotto" + prodotto + "non è stato modificato.");
+            throw new RuntimeException(STR."Il prodotto\{prodotto}non è stato modificato.");
         }
     }
+
 }
