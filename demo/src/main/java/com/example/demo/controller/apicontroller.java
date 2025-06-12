@@ -6,6 +6,7 @@ import com.example.demo.entity.ProdottoEntity;
 import com.example.demo.services.ServiziProdotto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +19,20 @@ public class apicontroller {
     private ServiziProdotto serviziProdotto;
 
     @PostMapping("/aggiungiProdotto")
-    public ResponseEntity<ProdottoResponse> aggiungiProdotto(@RequestBody ProdottoRequest prodottoRequest){
-        ProdottoResponse prodottoResponse =  modelMapper.map(prodottoRequest, ProdottoResponse.class);
-        ProdottoEntity prodottoEntity =  modelMapper.map(prodottoRequest, ProdottoEntity.class);
-        serviziProdotto.aggiungiProdotto(prodottoEntity);
-      return  ResponseEntity.ok(prodottoResponse);
+    public ResponseEntity<ProdottoResponse> aggiungiProdotto(@RequestBody ProdottoRequest prodottoRequest) {
+        ProdottoResponse prodottoResponse = modelMapper.map(prodottoRequest, ProdottoResponse.class);
+        serviziProdotto.aggiungiProdotto(prodottoRequest);
+        return ResponseEntity.ok(prodottoResponse);
     }
 
+    @PutMapping("/modificaProdotto/{idProdotto}")
+    public ResponseEntity<ProdottoResponse> modificaProdotto(@RequestBody ProdottoRequest prodottoRequest, @PathVariable Long idProdotto) {
+        try {
+            ProdottoResponse prodottoAggiornato = serviziProdotto.modificaProdotto(prodottoRequest, idProdotto);
+            return new ResponseEntity<>(prodottoAggiornato, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
 }

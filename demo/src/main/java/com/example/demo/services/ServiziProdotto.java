@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.controller.request.ProdottoRequest;
+import com.example.demo.controller.response.ProdottoResponse;
 import com.example.demo.entity.ProdottoEntity;
 import org.springframework.stereotype.Service;
 
@@ -8,5 +9,5 @@ import org.springframework.stereotype.Service;
 public interface ServiziProdotto {
     void aggiungiProdotto(ProdottoRequest prodotto);
 
-     ProdottoEntity modificaProdotto(ProdottoEntity prodotto, Long idProdotto);
+    ProdottoResponse modificaProdotto(ProdottoRequest prodotto, Long idProdotto);
 }
