@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import static java.lang.StringTemplate.STR;
-
+@Service
 public class ServiziProdottoImpl implements ServiziProdotto {
 
     @Autowired
@@ -40,7 +39,7 @@ public class ServiziProdottoImpl implements ServiziProdotto {
                         ProdottoEntity prodottoAggiornato = prodottoRepository.save(prodottoEsistente);
                             return modelMapper.map(prodottoAggiornato, ProdottoResponse.class);
         } else {
-            throw new RuntimeException(STR."Il prodotto\{prodotto}non è stato modificato.");
+            throw new RuntimeException("Prodotto con ID " + idProdotto + " non modificato.");
         }
     }
 
