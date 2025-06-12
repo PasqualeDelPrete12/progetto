@@ -10,4 +10,6 @@ public interface ServiziProdotto {
     void aggiungiProdotto(ProdottoRequest prodotto);
 
     ProdottoResponse modificaProdotto(ProdottoRequest prodotto, Long idProdotto);
+
+    ProdottoResponse recuperaProdotto(Long idProdotto) throws ClassNotFoundException;
 }

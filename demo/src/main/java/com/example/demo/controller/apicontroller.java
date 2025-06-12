@@ -34,5 +34,10 @@ public class apicontroller {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @GetMapping("/recuperaProdotto/{idProdotto}")
+    public ResponseEntity<ProdottoResponse> recuperaProdotto(@PathVariable Long idProdotto) throws ClassNotFoundException {
+        ProdottoResponse prodottoResponse = serviziProdotto.recuperaProdotto(idProdotto);
+        return ResponseEntity.ok(prodottoResponse);
+    }
 
 }

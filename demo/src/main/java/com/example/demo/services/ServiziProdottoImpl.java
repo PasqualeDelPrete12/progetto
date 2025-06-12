@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class ServiziProdottoImpl implements ServiziProdotto {
 
-    @Autowired // Inject your ProdottoRepository
+    @Autowired
     private ProdottoRepository prodottoRepository;
     private ModelMapper modelMapper = new ModelMapper();
     /**
@@ -42,4 +42,17 @@ public class ServiziProdottoImpl implements ServiziProdotto {
         }
     }
 
+    /**
+     * @param idProdotto
+     * @return
+     */
+    @Override
+    public ProdottoResponse recuperaProdotto(Long idProdotto) throws ClassNotFoundException {
+        Optional<ProdottoEntity> prodottoEntity = prodottoRepository.findById(idProdotto);
+        if(prodottoEntity.isPresent()){
+            return modelMapper.map(prodottoEntity.get(),ProdottoResponse.class);
+        }else{
+            throw new ClassNotFoundException("non esiste il prodotto");
+        }
+    }
 }
