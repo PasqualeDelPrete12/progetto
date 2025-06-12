@@ -39,5 +39,14 @@ public class apicontroller {
         ProdottoResponse prodottoResponse = serviziProdotto.recuperaProdotto(idProdotto);
         return ResponseEntity.ok(prodottoResponse);
     }
+    @DeleteMapping("/eliminaProdotto/{idProdotto}")
+    public ResponseEntity<Void> eliminaProdotto(@PathVariable Long idProdotto) {
+        try {
+            serviziProdotto.eliminaProdotto(idProdotto);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
 }

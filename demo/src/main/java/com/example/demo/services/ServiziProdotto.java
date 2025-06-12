@@ -12,4 +12,6 @@ public interface ServiziProdotto {
     ProdottoResponse modificaProdotto(ProdottoRequest prodotto, Long idProdotto);
 
     ProdottoResponse recuperaProdotto(Long idProdotto) throws ClassNotFoundException;
+
+    void eliminaProdotto(Long idProdotto);
 }

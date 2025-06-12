@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static java.lang.StringTemplate.STR;
+
 public class ServiziProdottoImpl implements ServiziProdotto {
 
     @Autowired
@@ -53,6 +55,17 @@ public class ServiziProdottoImpl implements ServiziProdotto {
             return modelMapper.map(prodottoEntity.get(),ProdottoResponse.class);
         }else{
             throw new ClassNotFoundException("non esiste il prodotto");
+        }
+    }
+    /**
+     * @param idProdotto
+     */
+    @Override
+    public void eliminaProdotto(Long idProdotto){
+        if (prodottoRepository.existsById(idProdotto)) {
+            prodottoRepository.deleteById(idProdotto);
+        } else {
+            throw new RuntimeException("Prodotto con ID " + idProdotto + " non trovato.");
         }
     }
 }
